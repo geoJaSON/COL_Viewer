@@ -10,6 +10,7 @@ window.CONFIG = {
 
   // SHA-256 of the access password. Default below is sha256("changeme").
   // Regenerate with: python scripts/hash_password.py 'your-new-password'
+  // Don't get excited, the password is just a gate to keep casual visitors out.
   PASSWORD_SHA256: '69b8055eb93335e3cea5ea032913c57b4b68ab69cb26ae10f80ac10741f0a940',
 
   // Raster rendering

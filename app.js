@@ -227,9 +227,16 @@
     if (firstType.includes('Point')) {
       const cluster = L.markerClusterGroup({ chunkedLoading: true });
       L.geoJSON(geojson, {
-        pointToLayer: (_f, latlng) => L.circleMarker(latlng, {
-          radius: 5, color: '#4a7fff', weight: 1, fillOpacity: 0.7,
-        }),
+        pointToLayer: (feature, latlng) => {
+          const color = substrateColor(feature);
+          return L.circleMarker(latlng, {
+            radius: 5,
+            color,
+            fillColor: color,
+            weight: 1,
+            fillOpacity: 0.7,
+          });
+        },
       }).eachLayer(l => cluster.addLayer(l));
       return cluster;
     }
@@ -253,6 +260,24 @@
     const p = feature?.properties;
     if (!p) return null;
     return p.Name ?? p.name ?? p.NAME ?? null;
+  }
+
+  function substrateColor(feature) {
+    const raw = feature?.properties?.substrate;
+    const normalized = String(raw ?? '')
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, ' ');
+
+    const colorBySubstrate = {
+      'buried shell': '#b2e061',
+      'firm/hard bottom': '#fff15c',
+      'mud': '#bd7ebe',
+      'scattered shell': '#f79f40',
+      'solid reef': '#31ad41',
+    };
+
+    return colorBySubstrate[normalized] ?? '#4a7fff';
   }
 
   // ---------- utils ----------
