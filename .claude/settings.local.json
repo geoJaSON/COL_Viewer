@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \"import hashlib; print\\(hashlib.sha256\\(b'changeme'\\).hexdigest\\(\\)\\)\")"
+    ]
+  }
+}

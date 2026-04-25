@@ -1,0 +1,8 @@
+Raw_Tifs/
+Raw_GeoJSON/
+COGs/
+scripts/
+.env
+__pycache__/
+*.pyc
+requirements.txt

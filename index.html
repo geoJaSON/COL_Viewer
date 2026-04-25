@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>COL Viewer</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="gate" class="gate">
+    <form id="gate-form" class="gate-box">
+      <h1>COL Viewer</h1>
+      <label for="gate-input">Password</label>
+      <input id="gate-input" type="password" autocomplete="off" autofocus />
+      <button type="submit">Enter</button>
+      <p id="gate-error" class="gate-error"></p>
+    </form>
+  </div>
+
+  <div id="app" class="hidden">
+    <aside id="sidebar">
+      <h2>COL Viewer</h2>
+      <section>
+        <h3>Rasters</h3>
+        <div id="raster-list" class="layer-list">Loading&hellip;</div>
+      </section>
+      <section>
+        <h3>Vectors</h3>
+        <div id="vector-list" class="layer-list">Loading&hellip;</div>
+      </section>
+    </aside>
+    <div id="map"></div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="https://unpkg.com/georaster@1.6.0/dist/georaster.browser.bundle.min.js"></script>
+  <script src="https://unpkg.com/georaster-layer-for-leaflet@3.10.0/dist/georaster-layer-for-leaflet.min.js"></script>
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

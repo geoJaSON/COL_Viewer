@@ -1,0 +1,9 @@
+.env
+COGs/
+Raw_Tifs/
+Raw_GeoJSON/
+__pycache__/
+*.pyc
+.vercel/
+node_modules/
+.DS_Store
