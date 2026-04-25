@@ -190,7 +190,7 @@
     el.className = 'layer-item';
     el.innerHTML = `
       <div class="layer-item-header">
-        <input type="checkbox" checked>
+        <input type="checkbox">
         <label>${escapeHtml(name)}</label>
       </div>
     `;
@@ -198,8 +198,9 @@
     el.querySelector('label').addEventListener('click', () => cb.click());
 
     let layer = null;
-    loadVectorLayer(name).then(l => {
-      layer = l;
+    loadVectorLayer(name).then(result => {
+      layer = result.layer;
+      cb.checked = !result.isPoint;
       if (cb.checked) layer.addTo(map);
     }).catch(err => {
       console.error(err);
@@ -225,8 +226,7 @@
     const firstType = geojson.features?.[0]?.geometry?.type || '';
 
     if (firstType.includes('Point')) {
-      const cluster = L.markerClusterGroup({ chunkedLoading: true });
-      L.geoJSON(geojson, {
+      const layer = L.geoJSON(geojson, {
         pointToLayer: (feature, latlng) => {
           const color = substrateColor(feature);
           return L.circleMarker(latlng, {
@@ -237,11 +237,12 @@
             fillOpacity: 0.7,
           });
         },
-      }).eachLayer(l => cluster.addLayer(l));
-      return cluster;
+      });
+      return { layer, isPoint: true };
     }
 
-    return L.geoJSON(geojson, {
+    return {
+      layer: L.geoJSON(geojson, {
       style: { color: '#4a7fff', weight: 2, fillOpacity: 0.15 },
       onEachFeature: (feature, layer) => {
         const name = featureName(feature);
@@ -253,7 +254,9 @@
           });
         }
       },
-    });
+    }),
+      isPoint: false,
+    };
   }
 
   function featureName(feature) {
