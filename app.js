@@ -273,11 +273,11 @@
       .replace(/\s+/g, ' ');
 
     const colorBySubstrate = {
-      'buried shell': '#b2e061',
-      'firm/hard bottom': '#fff15c',
-      'mud': '#bd7ebe',
-      'scattered shell': '#f79f40',
-      'solid reef': '#31ad41',
+      'Buried Shell': '#b2e061',
+      'Firm/Hard Bottom': '#fff15c',
+      'Mud': '#bd7ebe',
+      'Scattered Shell': '#f79f40',
+      'Solid Reef': '#31ad41',
     };
 
     return colorBySubstrate[normalized] ?? '#4a7fff';
